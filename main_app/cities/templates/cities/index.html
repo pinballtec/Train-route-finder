@@ -1,0 +1,17 @@
+{% extends "cities/base.html" %}
+    {% block content %}
+
+        {% for object in context %}
+        <div class="container">
+            <div class="row mb-3">
+
+                <div class="col-sm-4 themed-grid-col">
+                    <h2 class="display-6">Cities: </h2>
+                    <p>{{object.name}}</p>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    {% endblock content %}
