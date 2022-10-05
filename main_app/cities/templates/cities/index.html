@@ -1,38 +1,41 @@
 {% extends "cities/base.html" %}
     {% block content %}
     <div CLASS="container">
-            <div class="row">
-                <div class="row mb-3">
-
-                    <div class="col-md-8 mx-auto my-2">
-                        <h2 class="display-6">Cities: </h2>
-                    </div>
-                    <div class="col-sm-4 themed-grid-col">
+        <h1>Cities: </h1>
+        <div class="row">
+            <div class="col-md">
+                    <table class="table">
                         {% for object in context %}
-                        <p><a class="col-sm-2 text-dark" href="{% url 'detail_view' object.pk %}">{{object.name}}</a></p>
-                    </div>
-
-                </div>
-            </div>
-
-        {% endfor %}
-
-
-<!--        <form>-->
-<!--            <label>Name</label>-->
-<!--        </form>-->
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a class="col-sm-2 text-dark" href="{% url 'detail_view' object.pk %}">{{object.name}}</a>
+                                    </td>
+                                    <td>
+                                        <a class="col-sm-2 text-dark" href="{% url 'update_view' object.id %}">
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="col-sm-2 text-dark" href="{% url 'delete_view' object.id %}">
+                                            <button type="submit" class="btn btn-primary">Delete</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+           </div>
+        </div>
         <div class="row">
                 <div style="margin-top: 40px;" class="col-sm-2 themed-grid-col">
                     <form action="" method="POST">
                         {% csrf_token %}
                       <div class="col-xs-1">
-        <!--                <div class="col">-->
-        <!--                  <input type="text" class="form-control" placeholder="City Name">-->
-        <!--                </div>-->
                           {{form.as_p}}
                       </div>
                         <div class="col">
-                        <input class="btn btn-primary" type="submit" value="Submit" style="margin-top: 10px">
+                            <input class="btn btn-primary" type="submit" value="Submit" style="margin-top: 10px">
                         </div>
                     </form>
                 </div>
