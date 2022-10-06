@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRe
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 from .models import City
 from .forms import City_Input
 
@@ -25,7 +26,10 @@ def cities_showcase(request):
             form.save()
     form = City_Input()
     cities = City.objects.all()
-    context = {'context': cities, 'form': form}
+    paginator = Paginator(cities, 1)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {'page_obj': page_obj, 'form': form}
     return render(request, 'cities/index.html', context)
 
 
