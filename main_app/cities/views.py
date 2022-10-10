@@ -26,7 +26,7 @@ def cities_showcase(request):
             form.save()
     form = City_Input()
     cities = City.objects.all()
-    paginator = Paginator(cities, 1)
+    paginator = Paginator(cities, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {'page_obj': page_obj, 'form': form}
