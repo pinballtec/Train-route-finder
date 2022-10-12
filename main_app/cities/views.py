@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+from django.contrib import messages
 from .models import City
 from .forms import City_Input
 
@@ -33,12 +34,6 @@ def cities_showcase(request):
     return render(request, 'cities/index.html', context)
 
 
-# class Update_City(UpdateView):
-#     model = City
-#     fields = ['name']
-#     template_name_suffix = 'cities/update.html'
-#     success_url = reverse_lazy('first_test')
-
 def update_view(request, id):
     context = {}
 
@@ -48,6 +43,7 @@ def update_view(request, id):
 
     if form.is_valid():
         form.save()
+        messages.success(request, f'City has  been updated')
         return redirect("first_test")
 
     context["form"] = form
