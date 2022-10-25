@@ -1,0 +1,10 @@
+{% extends "cities/base.html" %}
+    {% block content %}
+    <div class="row">
+    <div class="col-md-4">
+        <form method="post"> {% csrf_token %}
+        <button type="submit" value="delete" class="btn btn-primary">Delete</button>
+        </form>
+    </div>
+</div>
+    {% endblock content %}
