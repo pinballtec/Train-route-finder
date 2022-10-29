@@ -13,12 +13,17 @@ def trains_showcase_detail(request, pk):
 
 
 def trains_showcase(request):
+    if request.method == 'POST':
+        form = Train_Input(request.POST)
+        if form.is_valid():
+            form.save()
+    form = Train_Input()
     cities = Trains.objects.all()
     paginator = Paginator(cities, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    context = {'page_obj': page_obj}
-    return render(request, 'cities/index.html', context)
+    context = {'page_obj': page_obj, 'form': form}
+    return render(request, 'trains/index.html', context)
 
 
 def update_view(request, id):

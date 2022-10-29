@@ -1,15 +1,31 @@
-{% extends "trains/base.html" %}
+{% extends "base.html" %}
     {% block content %}
     <div CLASS="container">
-        <h1>Trains: </h1>
+        <h1 style="text-align: center;">Trains</h1>
         <div class="row">
             <div class="col-md">
                     <table class="table">
+                        <tr>
+                                <th>Number</th>
+                                <th>Travel Time</th>
+                                <th>Arrival City</th>
+                                <th>Departure City</th>
+                            </tr>
                         {% for object in page_obj %}
                             <tbody>
                                 <tr>
+
                                     <td>
                                         <a class="col-sm-2 text-dark" href="{% url 'detail_view' object.pk %}">{{object.name}}</a>
+                                    </td>
+                                    <td>
+                                        <a class="col-sm-2 text-dark" href="{% url 'detail_view' object.pk %}">{{object.travel_time}}</a>
+                                    </td>
+                                    <td>
+                                        <a class="col-sm-2 text-dark" href="{% url 'detail_view' object.pk %}">{{object.arrival_city}}</a>
+                                    </td>
+                                    <td>
+                                        <a class="col-sm-2 text-dark" href="{% url 'detail_view' object.pk %}">{{object.departure_city}}</a>
                                     </td>
                                     <td>
                                         <a class="col-sm-2 text-dark" href="{% url 'update_view' object.id %}">
