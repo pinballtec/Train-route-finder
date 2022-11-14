@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Rotes input {% endblock title %}
+
+{% block content %}
+
+<h1>Input of route</h1>
+
+<form>
+    {% csrf_token %}
+    {{ form }}
+    <div class="col">
+        <input class="btn btn-primary" type="submit" value="Search" style="margin-top: 10px">
+    </div>
+</form>
+{% endblock content %}
