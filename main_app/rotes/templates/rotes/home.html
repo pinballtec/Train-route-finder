@@ -6,11 +6,18 @@
 
 <h1>Input of route</h1>
 
-<form>
-    {% csrf_token %}
-    {{ form }}
-    <div class="col">
-        <input class="btn btn-primary" type="submit" value="Search" style="margin-top: 10px">
-    </div>
-</form>
+
+        <div class="row">
+                <div style="margin-top: 40px;" class="col-sm-2 themed-grid-col">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                      <div class="col-xs-1">
+                          {{form.as_p}}
+                      </div>
+                        <div class="col">
+                            <input class="btn btn-primary" type="submit" value="Submit" style="margin-top: 10px">
+                        </div>
+                    </form>
+                </div>
+        </div>
 {% endblock content %}
