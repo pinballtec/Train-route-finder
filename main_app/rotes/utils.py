@@ -24,6 +24,7 @@ def get_graph(qs):
 
 
 def get_routes(request, form) -> dict:
+    """Implementing a graph search"""
     context = {'form': form}
     qs = Trains.objects.all()
     graph = get_graph(qs)
@@ -37,10 +38,10 @@ def get_routes(request, form) -> dict:
     if not len(all_ways):
         raise ValueError('Route not found')
     if cities:
-        _cities = [city.id for city in _cities]
+        cities = [city.id for city in cities]
         right_ways = []
         for route in all_ways:
-            if all(city in route for city in _cities):
+            if all(city in route for city in cities):
                 right_ways.append(route)
             if not right_ways:
                 raise ValueError('This Route is not possible')

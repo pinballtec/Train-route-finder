@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %} Rotes input {% endblock title %}
+
+{% block content %}
+        <h1 class="display-4 text-center my-4">Input of routes</h1>
+    <div class="row ">
+        {% if routes %}
+            <div class='col-md-8 mx-auto'>
+            <h3> {% if routes|length == 1%}
+                    Routes
+                {% else %}
+                    Rooutes
+                {% endif %} from {{cities.from_city}} to {{cities.to_city}} </h3>
+            <hr>
+            {% for route in routes %}
+                <form action="{% url 'add_route' %}" method="get">
+                    <input type='hidden' name='from_city' value='{{route.from_city}}'/>
+                    <input type='hidden' name='to_city' value='{{route.to_city}}'/>
+                    <input type='hidden' name='travel_times' value='{{route.total_time}}'/>
+                    <input type='hidden' name='across_cities'
+                        value='{% for train in route.route %} {{train.id}} {% endfor %}'/>
+
+                {% if forloop.first %}
+                    <h5> Smallest route </h5>
+                {% endif %}
+                <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Train list</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for train in route.route %}
+                    <tr>
+                        <td> Train <strong> N.{{train.name}}</strong> , From {{train.from_city}} , to  {{train.to_city}}.
+                        Time: {{train.travel_time}} </td>
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+                </table>
+                <p>All time combined{{route.total_time}} </p>
+                <br/>
+                <button type='submit' class='btn btn-success'>Save Route </button>
+                </form>
+                <br/><br/>
+
+
+            {% endfor %}
+
+             </div>
+        {% endif %}
+        <div class='col-md-8 mx-auto'>
+            {{ways}}
+           <form action="{% url 'routes_home' %}" method="post"> {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="Найти">
+            </form>
+        </div>
+    </div>
+{% endblock content %}

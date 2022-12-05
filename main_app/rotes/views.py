@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .forms import RoutesForm
 from django.contrib import messages
+from django.shortcuts import redirect
 
 from .utils import get_routes
 
@@ -25,5 +26,11 @@ def home(request):
         return render(request, 'rotes/home.html', {'form': form})
 
 
-def find_routes(requests):
-    pass
+def add_routes(request):
+    if request.method == 'POST':
+        context = {}
+        data = request.POST
+        return render(request, 'rotes/create.html', context)
+    else:
+        messages.error(request, 'No data')
+        return redirect('/')
